@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-
 import './App.css'
+import AddTask from './components/AddTask';
+import InputTask from './components/InputTask';
+import { RecoilRoot } from 'recoil';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-
+    <RecoilRoot>
+      <div className='task'>
+        <InputTask/>
+        <AddTask/>
       </div>
-    </>
+    </RecoilRoot>
   )
 }
 
