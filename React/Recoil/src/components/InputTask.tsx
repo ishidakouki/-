@@ -15,12 +15,12 @@ const InputTask = () => {
   const onChange = useCallback(
     (e: React.onChangeEvent<HTMLInputElement>) => {
       setInputTitle(e.target.value);
-      console.log(inputTitle)
+      //console.log(inputTitle)
     },
     [inputTitle]
   )
   const handleClick = () => {
-    setAddTitle([...addTitle,{id: getKey(), title: inputTitle}])
+    setAddTitle([...addTitle,{id: getKey(), title: inputTitle, approval: false}])
     setInputTitle('')
     console.log(addTitle)
   }

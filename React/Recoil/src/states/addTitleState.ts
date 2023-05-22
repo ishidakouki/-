@@ -7,6 +7,7 @@ export const addTitleState = atom<Array<Task>>({
   default: [],
 })
 
+//selector=atomの状態を操作したい場合に利用する
 export const addTitleStateLength = selector<number>({
   key:"addTitleStateLength",
   get: ({ get }) => {
