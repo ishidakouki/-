@@ -8,6 +8,8 @@ export default function create () {
     const [program, setProgram] = useRecoilState(programState)
 
     console.log(program)
+
+    //TODO:getSituationの赤線の修正
     return (
         <div>
             <table className="custom-table">
