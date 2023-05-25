@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* その他のスタイルを追加 */
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    /* その他のスタイルを追加 */
+  }
