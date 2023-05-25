@@ -1,18 +1,32 @@
+"use client";
+import { useRecoilState } from 'recoil'
+import { programState } from "../state/programState";
+import { getSituation } from "../component/index/getSituation"
 
 export default function create () {
+    //console.log(programState);
+    const [program, setProgram] = useRecoilState(programState)
 
+    console.log(program)
     return (
         <div>
             <table className="custom-table">
                 <thead>
-                    <th>id</th>
-                    <th>名前</th>
-                    <th>承認</th>
+                    <tr>
+                        <th>id</th>
+                        <th>番組名</th>
+                        <th>承認</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <td>idを表示</td>
-                    <td>名前を表示</td>
-                    <td>承認を表示</td>
+                    {program.map((program,index) => (
+                    <tr key={index}>
+                        <td>{program.id}</td>
+                        <td>{program.name}</td>
+                        <td>{program.approval ? "承認":"未承認" }</td>
+                        <td>{getSituation(program.situation)}</td>
+                    </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

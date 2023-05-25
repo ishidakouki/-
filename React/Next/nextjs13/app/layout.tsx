@@ -1,4 +1,5 @@
 "use client";
+import { RecoilRoot } from 'recoil';
 
 export default function RootLayout({
   children,
@@ -7,9 +8,11 @@ export default function RootLayout({
 }) {
 
   return (
-    <html lang="en">
-      <body>
-        <h1>Todo List</h1>{children}</body>
-    </html>
+    <RecoilRoot>
+      <html lang="en">
+        <body>
+            <h1>Todo List</h1>{children}</body>
+      </html>
+    </RecoilRoot>
   )
 }
