@@ -8,7 +8,7 @@ export default function create () {
   return (
     <div>
       <h1>番組一覧</h1>
-      <Link href="/create">登録画面に遷移</Link>
+      <button className="create"><Link href="/create">番組を追加</Link></button>
       <Search></Search>
       <Index></Index>
     </div>

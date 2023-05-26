@@ -17,7 +17,7 @@ export default function create () {
       <tr>
         <td>
           <select id="search-situation">
-            <option value="">すべて</option>
+            <option value="">通常</option>
             <option value="option1">降順</option>
             <option value="option2">昇順</option>
           </select>
