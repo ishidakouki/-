@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Index from "./component/index";
 import Search from "./component/search";
+import "./css/layput.css";
 
 export default function create () {
 
   return (
     <div>
+      <h1>番組一覧</h1>
+      <Link href="/create">登録画面に遷移</Link>
       <Search></Search>
       <Index></Index>
-      <Link href="/create">登録画面に遷移</Link>
     </div>
   )
 }

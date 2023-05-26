@@ -9,5 +9,11 @@ export const programState = atom<Program[]>({
         name: "番組0",
         approval: false,
         situation: 0
+    },
+    {
+        id:1,
+        name: "番組1",
+        approval: true,
+        situation: 10
     }]
 })

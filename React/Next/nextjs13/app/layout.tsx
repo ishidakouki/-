@@ -11,7 +11,7 @@ export default function RootLayout({
     <RecoilRoot>
       <html lang="en">
         <body>
-            <h1>Todo List</h1>{children}</body>
+            {children}</body>
       </html>
     </RecoilRoot>
   )
