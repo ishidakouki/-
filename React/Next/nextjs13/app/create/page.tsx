@@ -1,14 +1,18 @@
 "use client";
 import Link from "next/link";
 import "../css/create.css";
-import { useRecoilState} from 'recoil';
-import React, {useReducer} from 'react'
-import {programState} from "../state/programState";
+import { useRecoilState, useRecoilValue} from 'recoil';
+import React, {useReducer,useEffect} from 'react'
+import {nextProgramId, programState} from "../state/programState";
 import { Program } from '../program/program';
 
 export default function page () {
 
+  //現在登録されている番組
   const [program,setProgram] = useRecoilState(programState)
+
+  //次登録する番組のid
+  const nextId = useRecoilValue(nextProgramId)
 
   const reducer = (state:Program, action: { type: string; result: any }) :Program => {
     //console.log(action.type)
@@ -26,23 +30,20 @@ export default function page () {
           return state
       }
     }
-  
+
   const lnitialProgram :Program = {
-    id: 1,
+    id: nextId,
     name: "",
     approval: false,
-    situation: 0
+    situation: 20
   }
   //入力情報を保持する
   const [createProgram, dispatch] = useReducer(reducer,lnitialProgram)
 
   const submit = () => {
-    //programで更新
-    setProgram([createProgram])
-    console.log(program)
+    setProgram((prevProgram) => [...prevProgram, createProgram]);
   }
 
-  console.log(createProgram)
 
   //TODO:ラジオボタンの初期表示がされない
 
@@ -65,7 +66,6 @@ export default function page () {
             <div className="radio-group">
               <label>
                 <input type="radio" id="approval-1" name="approval" value="true"
-                //onChange={() => console.log(!createProgram.approval)}
                 onChange={() => dispatch(
                   {"type": "SET_APPROVAL", "result": !createProgram.approval}
               )}
@@ -89,6 +89,7 @@ export default function page () {
                 onChange={() => dispatch(
                   {"type": "SET_SITUATION", "result": 0}
               )}
+              checked={createProgram.situation === 0}
                 /> 放送中
               </label>
               <label >
@@ -96,6 +97,7 @@ export default function page () {
                 onChange={() => dispatch(
                   {"type": "SET_SITUATION", "result": 10}
               )}
+              checked={createProgram.situation === 10}
               /> 放送予定
               </label>
               <label >
@@ -103,11 +105,12 @@ export default function page () {
                 onChange={() => dispatch(
                   {"type": "SET_SITUATION", "result": 20}
               )}
+              checked={createProgram.situation === 20}
               /> 作成中
               </label>
             </div>
           </div>
-          <button className="buttonSubmit" type="submit" onClick={submit}>登録</button>
+          <button className="buttonSubmit" type="submit" onClick={() => submit()}>登録</button>
           <button className="buttonCancel" ><Link href="/">キャンセル</Link></button>
         </form>
       </div>
