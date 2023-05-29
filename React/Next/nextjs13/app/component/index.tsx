@@ -15,10 +15,10 @@ export default function create () {
             <table className="custom-table">
             <thead>
                 <tr>
-                <th>id</th>
-                <th>番組名</th>
-                <th>承認</th>
-                <th>公開設定</th>
+                    <th>id</th>
+                    <th>番組名</th>
+                    <th>承認</th>
+                    <th>公開設定</th>
                 </tr>
             </thead>
             <tbody>

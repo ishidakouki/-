@@ -3,7 +3,7 @@ import Index from "./component/index";
 import Search from "./component/search";
 import "./css/layput.css";
 
-export default function create () {
+export default function page () {
 
   return (
     <div>
