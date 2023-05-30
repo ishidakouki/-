@@ -1,9 +1,14 @@
 "use client";
+import { useRecoilState } from 'recoil'
+import { SearchCondition } from "../state/programState";
 import "../css/serach.css";
 import React, {useRef, useEffect} from 'react';
 
-export default function create () {
+export default function search () {
 
+  const [searchValue, setSearchValue] = useRecoilState(SearchCondition)
+
+  console.log(searchValue)
   //TODO:recoilのオブジェクトに整形しrecoilに渡す
   
   const nameEl = useRef(null)
@@ -11,16 +16,29 @@ export default function create () {
 
   //onchangeの関数を定義して検索条件を作成する
   const setSearch = (e:any) => {
+
+    console.log("値変更")
+      setSearchValue(
+    {
+      id: "default",
+      name: "番組",
+      approval: "all",
+      situation: {
+          0: false,
+          10: false,
+          20: false,
+      }
+  })
     // console.log(e.target.value)
     // console.log(e.target.id)
 
     // console.log(nameEl.current)
-    const value = {
-      "id": e.target.id === "id" ? e.target.value : "",
-      "name": e.target.id === "name" ? e.target.value : "",
-      "approval":e.target.id === "approval" ? e.target.value : "",
-      "situation":e.target.id === "situation" ? e.target.value : ""
-    }
+    // const value = {
+    //   "id": e.target.id === "id" ? e.target.value : "",
+    //   "name": e.target.id === "name" ? e.target.value : "",
+    //   "approval":e.target.id === "approval" ? e.target.value : "",
+    //   "situation":e.target.id === "situation" ? e.target.value : ""
+    // }
 
     //console.log(value)
 

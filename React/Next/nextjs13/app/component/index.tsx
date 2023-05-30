@@ -4,7 +4,7 @@ import { programState,searchProgram } from "../state/programState";
 import { getSituation } from "../component/index/getSituation";
 import "../css/index.css"
 
-export default function create () {
+export default function index () {
     //console.log(programState);
     const [program, setProgram] = useRecoilState(programState)
 
@@ -24,7 +24,7 @@ export default function create () {
                     </tr>
                 </thead>
                 <tbody>
-                    {program.map((program, index) => (
+                    {newProgram.map((program, index) => (
                     <tr key={index}>
                         <td>{program.id}</td>
                         <td>{program.name}</td>
