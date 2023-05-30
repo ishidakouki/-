@@ -1,6 +1,6 @@
 "use client";
-import { useRecoilState } from 'recoil'
-import { programState } from "../state/programState";
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { programState,searchProgram } from "../state/programState";
 import { getSituation } from "../component/index/getSituation";
 import "../css/index.css"
 
@@ -9,6 +9,8 @@ export default function create () {
     const [program, setProgram] = useRecoilState(programState)
 
     //console.log(program)
+    const newProgram = useRecoilValue(searchProgram)
+    console.log(newProgram)
 
     return (
         <div className="program-list">
