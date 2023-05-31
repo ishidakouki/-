@@ -4,7 +4,7 @@ import "../css/create.css";
 import { useRecoilState, useRecoilValue} from 'recoil';
 import React, {useReducer,useEffect} from 'react'
 import {nextProgramId, programState} from "../state/programState";
-import { Program } from '../program/program';
+import { Program } from '../interfaces/interfaces';
 
 export default function page () {
 
@@ -43,9 +43,6 @@ export default function page () {
   const submit = () => {
     setProgram((prevProgram) => [...prevProgram, createProgram]);
   }
-
-
-  //TODO:ラジオボタンの初期表示がされない
 
   return (
     <>

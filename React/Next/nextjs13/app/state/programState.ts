@@ -22,8 +22,8 @@ export const SearchCondition = atom<SearchValue>({
         name: "",
         approval: "all",
         situation: {
-            0: true,
-            10: true,
+            0: false,
+            10: false,
             20: false,
         },
       },
@@ -58,7 +58,6 @@ export const searchProgram = selector<Program[]>({
         const programList:Array<Program> = get(programState);
 
         //検索条件を取得
-        //TODO: 型を定義する
         const serachValue:SearchValue = get(SearchCondition)
 
         //検索関数を呼び出し検索結果を出力
@@ -66,7 +65,5 @@ export const searchProgram = selector<Program[]>({
 
         //結果を返す
         return newProgram
-
-
     }
 })

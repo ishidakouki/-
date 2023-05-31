@@ -2,48 +2,25 @@
 import { useRecoilState } from 'recoil'
 import { SearchCondition } from "../state/programState";
 import "../css/serach.css";
-import React, {useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 
 export default function search () {
 
   const [searchValue, setSearchValue] = useRecoilState(SearchCondition)
 
-  console.log(searchValue)
-  //TODO:recoilのオブジェクトに整形しrecoilに渡す
-  
-  const nameEl = useRef(null)
-
-
   //onchangeの関数を定義して検索条件を作成する
   const setSearch = (e:any) => {
-
-    console.log("値変更")
-      setSearchValue(
-    {
-      id: "default",
-      name: "番組",
-      approval: "all",
-      situation: {
-          0: false,
-          10: false,
-          20: false,
-      }
-  })
-    // console.log(e.target.value)
-    // console.log(e.target.id)
-
-    // console.log(nameEl.current)
-    // const value = {
-    //   "id": e.target.id === "id" ? e.target.value : "",
-    //   "name": e.target.id === "name" ? e.target.value : "",
-    //   "approval":e.target.id === "approval" ? e.target.value : "",
-    //   "situation":e.target.id === "situation" ? e.target.value : ""
-    // }
-
-    //console.log(value)
-
+      setSearchValue({
+        id: e.target.id === "id"? e.target.value : searchValue.id,
+        name: e.target.id === "name"? e.target.value : searchValue.name,
+        approval: e.target.id === "approval"? e.target.value : searchValue.approval,
+        situation: {
+            0: e.target.id === "situation0"? !searchValue.situation[0] : searchValue.situation[0],
+            10:e.target.id === "situation10"? !searchValue.situation[10] : searchValue.situation[10],
+            20:e.target.id === "situation20"? !searchValue.situation[20] : searchValue.situation[20],
+        }
+      })
   }
-  //作成した検索条件をatomに渡す
 
     return (
       <div className="search-cp">
@@ -66,7 +43,7 @@ export default function search () {
                   <option value="desc">昇順</option>
                 </select>
               </td>
-              <td ref={nameEl}>
+              <td>
                 <input type="text" id="name" onChange={(e) => setSearch(e)}/>
               </td>
               <td onChange={(e) => setSearch(e)}>
@@ -85,15 +62,15 @@ export default function search () {
               </td>
               <td onChange={(e) => setSearch(e)}>
                 <label>
-                  <input id="situation" type="checkbox" value="0" />
+                  <input id="situation0" type="checkbox" value="0" />
                   放送中
                 </label>
                 <label>
-                  <input id="situation" type="checkbox" value="10" />
+                  <input id="situation10" type="checkbox" value="10" />
                   放送予定
                 </label>
                 <label>
-                  <input id="situation" type="checkbox" value="20" />
+                  <input id="situation20" type="checkbox" value="20" />
                   作成中
                 </label>
               </td>
