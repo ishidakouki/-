@@ -30,7 +30,11 @@
 
 .search-table th:nth-child(3),
 .search-table th:nth-child(4) {
-  width: 350px;
+  width: 300px;
+}
+
+.search-table th:nth-child(5) {
+  width: 50px;
 }
 
 .search-table input[type="text"] {

@@ -10,7 +10,13 @@ export default function index () {
 
     //console.log(program)
     const newProgram = useRecoilValue(searchProgram)
-    console.log(newProgram)
+    //console.log(newProgram)
+
+    const handleDelete = (id:number) => {
+        //programの配列から取得したid以外を返却する
+        let deleteProgram = program.filter((list) => list.id !== id);
+        setProgram(deleteProgram)
+    }
 
     return (
         <div className="program-list">
@@ -21,6 +27,7 @@ export default function index () {
                         <th>番組名</th>
                         <th>承認</th>
                         <th>公開設定</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +37,9 @@ export default function index () {
                         <td>{program.name}</td>
                         <td>{program.approval ? "承認" : "未承認"}</td>
                         <td>{getSituation(program.situation)}</td>
+                        <th>
+                            <button onClick={() => handleDelete(program.id)}>削除</button>
+                        </th>
                     </tr>
                     ))}
                 </tbody>

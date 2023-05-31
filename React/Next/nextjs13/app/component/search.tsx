@@ -31,6 +31,7 @@ export default function search () {
               <th>番組名</th>
               <th>承認</th>
               <th>公開設定</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -74,6 +75,7 @@ export default function search () {
                   作成中
                 </label>
               </td>
+              <td></td>
             </tr>
           </tbody>
         </table>
