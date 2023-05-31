@@ -63,6 +63,8 @@ export const searchProgram = selector<Program[]>({
         //検索関数を呼び出し検索結果を出力
         let newProgram = search(programList,serachValue)
 
+        //ページネーション情報を追加
+        
         //結果を返す
         return newProgram
     }
