@@ -6,7 +6,7 @@ import "../css/index.css"
 import Pagination from "../component/pagination/pagination";
 
 export default function index () {
-    //console.log(programState);
+
     const [program, setProgram] = useRecoilState(programState)
 
     //console.log(program)
