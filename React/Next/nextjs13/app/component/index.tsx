@@ -9,11 +9,10 @@ export default function index () {
     //console.log(programState);
     const [program, setProgram] = useRecoilState(programState)
 
-    //console.log(program)
     const newProgram = useRecoilValue(searchProgram)
-    //console.log(newProgram)
-
+    
     const handleDelete = (id:number) => {
+        console.log("削除")
         //programの配列から取得したid以外を返却する
         let deleteProgram = program.filter((list) => list.id !== id);
         setProgram(deleteProgram)

@@ -2,7 +2,7 @@
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { programState,SearchCondition } from "../state/programState";
 import "../css/serach.css";
-import React, {useRef} from 'react';
+import React, { useCallback } from 'react';
 
 export default function search () {
 
@@ -25,6 +25,7 @@ export default function search () {
   }
 
   const allDelete = () => {
+    console.log("allDelete")
     program([])
   }
 
