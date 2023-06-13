@@ -39,9 +39,9 @@ export default function index () {
                             <td>{program.name}</td>
                             <td>{program.approval ? "承認" : "未承認"}</td>
                             <td>{getSituation(program.situation)}</td>
-                            <th>
+                            <td>
                                 <button onClick={() => handleDelete(program.id)}>削除</button>
-                            </th>
+                            </td>
                         </tr>
                         ))}
                     </tbody>

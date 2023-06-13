@@ -1,12 +1,14 @@
 "use client";
-import { useRecoilState } from 'recoil'
-import { SearchCondition } from "../state/programState";
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { programState,SearchCondition } from "../state/programState";
 import "../css/serach.css";
 import React, {useRef} from 'react';
 
 export default function search () {
 
   const [searchValue, setSearchValue] = useRecoilState(SearchCondition)
+
+  const program = useSetRecoilState(programState)
 
   //onchangeの関数を定義して検索条件を作成する
   const setSearch = (e:any) => {
@@ -20,6 +22,10 @@ export default function search () {
             20:e.target.id === "situation20"? !searchValue.situation[20] : searchValue.situation[20],
         }
       })
+  }
+
+  const allDelete = () => {
+    program([])
   }
 
     return (
@@ -75,7 +81,9 @@ export default function search () {
                   作成中
                 </label>
               </td>
-              <td></td>
+              <td>
+                <button onClick={() => allDelete()}>すべての番組削除</button>
+              </td>
             </tr>
           </tbody>
         </table>

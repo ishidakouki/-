@@ -42,6 +42,7 @@ export default function page () {
 
   const submit = () => {
     setProgram((prevProgram) => [...prevProgram, createProgram]);
+    //登録確認ページに遷移
   }
 
   return (
@@ -107,8 +108,8 @@ export default function page () {
               </label>
             </div>
           </div>
-          <button className="buttonSubmit" type="submit" onClick={() => submit()}>登録</button>
           <button className="buttonCancel" ><Link href="/">キャンセル</Link></button>
+          <button className="buttonSubmit" type="submit" onClick={() => submit()}>登録</button>
         </form>
       </div>
     </>

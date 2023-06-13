@@ -2,6 +2,7 @@ import { atom, selector } from 'recoil'
 import { Program,SearchValue } from '../interfaces/interfaces'
 import { recoilPersist } from "recoil-persist";
 import { search }  from "../component/search/search";
+import { useProgramStateCreate } from "../hooks/programhooks";
 
 //標準でrecoil-persistというkey名でwebstorageに保存される（オプションで指定可能）
 const { persistAtom } = recoilPersist();
@@ -28,6 +29,7 @@ export const SearchCondition = atom<SearchValue>({
         },
       },
 })
+
 
 //次のidを算出する
 export const nextProgramId = selector<number>({
