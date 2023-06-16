@@ -8,7 +8,7 @@ export default function page () {
   return (
     <div>
       <h1>番組一覧</h1>
-      <h1>A1</h1>
+      <h1>A1で変更</h1>
       <button className="create"><Link href="/create">番組を追加</Link></button>
       <Search></Search>
       <Index></Index>
