@@ -1,31 +1,33 @@
 "use client";
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { programState,SearchCondition } from "../state/programState";
 import "../css/serach.css";
-import React, {useRef, useEffect} from 'react';
+import React, { useCallback } from 'react';
 
-export default function create () {
+export default function search () {
 
-  //TODO:recoilのオブジェクトに整形しrecoilに渡す
-  
-  const nameEl = useRef(null)
+  const [searchValue, setSearchValue] = useRecoilState(SearchCondition)
 
+  const program = useSetRecoilState(programState)
 
   //onchangeの関数を定義して検索条件を作成する
   const setSearch = (e:any) => {
-    // console.log(e.target.value)
-    // console.log(e.target.id)
-
-    // console.log(nameEl.current)
-    const value = {
-      "id": e.target.id === "id" ? e.target.value : "",
-      "name": e.target.id === "name" ? e.target.value : "",
-      "approval":e.target.id === "approval" ? e.target.value : "",
-      "situation":e.target.id === "situation" ? e.target.value : ""
-    }
-
-    //console.log(value)
-
+      setSearchValue({
+        id: e.target.id === "id"? e.target.value : searchValue.id,
+        name: e.target.id === "name"? e.target.value : searchValue.name,
+        approval: e.target.id === "approval"? e.target.value : searchValue.approval,
+        situation: {
+            0: e.target.id === "situation0"? !searchValue.situation[0] : searchValue.situation[0],
+            10:e.target.id === "situation10"? !searchValue.situation[10] : searchValue.situation[10],
+            20:e.target.id === "situation20"? !searchValue.situation[20] : searchValue.situation[20],
+        }
+      })
   }
-  //作成した検索条件をatomに渡す
+
+  const allDelete = () => {
+    console.log("allDelete")
+    program([])
+  }
 
     return (
       <div className="search-cp">
@@ -36,6 +38,7 @@ export default function create () {
               <th>番組名</th>
               <th>承認</th>
               <th>公開設定</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -48,7 +51,7 @@ export default function create () {
                   <option value="desc">昇順</option>
                 </select>
               </td>
-              <td ref={nameEl}>
+              <td>
                 <input type="text" id="name" onChange={(e) => setSearch(e)}/>
               </td>
               <td onChange={(e) => setSearch(e)}>
@@ -67,17 +70,20 @@ export default function create () {
               </td>
               <td onChange={(e) => setSearch(e)}>
                 <label>
-                  <input id="situation" type="checkbox" value="0" />
+                  <input id="situation0" type="checkbox" value="0" />
                   放送中
                 </label>
                 <label>
-                  <input id="situation" type="checkbox" value="10" />
+                  <input id="situation10" type="checkbox" value="10" />
                   放送予定
                 </label>
                 <label>
-                  <input id="situation" type="checkbox" value="20" />
+                  <input id="situation20" type="checkbox" value="20" />
                   作成中
                 </label>
+              </td>
+              <td>
+                <button onClick={() => allDelete()}>すべての番組削除</button>
               </td>
             </tr>
           </tbody>

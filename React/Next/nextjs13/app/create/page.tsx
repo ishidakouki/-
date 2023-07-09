@@ -4,7 +4,7 @@ import "../css/create.css";
 import { useRecoilState, useRecoilValue} from 'recoil';
 import React, {useReducer,useEffect} from 'react'
 import {nextProgramId, programState} from "../state/programState";
-import { Program } from '../program/program';
+import { Program } from '../interfaces/interfaces';
 
 export default function page () {
 
@@ -42,10 +42,8 @@ export default function page () {
 
   const submit = () => {
     setProgram((prevProgram) => [...prevProgram, createProgram]);
+    //登録確認ページに遷移
   }
-
-
-  //TODO:ラジオボタンの初期表示がされない
 
   return (
     <>
@@ -110,8 +108,8 @@ export default function page () {
               </label>
             </div>
           </div>
-          <button className="buttonSubmit" type="submit" onClick={() => submit()}>登録</button>
           <button className="buttonCancel" ><Link href="/">キャンセル</Link></button>
+          <button className="buttonSubmit" type="submit" onClick={() => submit()}>登録</button>
         </form>
       </div>
     </>

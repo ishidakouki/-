@@ -1,7 +1,8 @@
 import { atom, selector } from 'recoil'
-import { Program } from '../program/program'
+import { Program,SearchValue } from '../interfaces/interfaces'
 import { recoilPersist } from "recoil-persist";
 import { search }  from "../component/search/search";
+import React, { useCallback } from 'react';
 
 //標準でrecoil-persistというkey名でwebstorageに保存される（オプションで指定可能）
 const { persistAtom } = recoilPersist();
@@ -15,22 +16,20 @@ export const programState = atom<Program[]>({
 
 
 //検索条件を管理する
-//TODO: 型を定義する
-export const SearchCondition = atom<any>({
+export const SearchCondition = atom<SearchValue>({
     key: "SearchCondition",
-    default:
-        {
-            id: "asc",
-            name: "",
-            approval: "true",
-            situation: {
-                0: true,
-                10: false,
-                20: true,
-            }
-        }
-    ,
+    default: {
+        id: "default",
+        name: "",
+        approval: "all",
+        situation: {
+            0: false,
+            10: false,
+            20: false,
+        },
+      },
 })
+
 
 //次のidを算出する
 export const nextProgramId = selector<number>({
@@ -61,15 +60,14 @@ export const searchProgram = selector<Program[]>({
         const programList:Array<Program> = get(programState);
 
         //検索条件を取得
-        //TODO: 型を定義する
-        const serachValue:Array<any> = get(SearchCondition)
+        const serachValue:SearchValue = get(SearchCondition)
 
         //検索関数を呼び出し検索結果を出力
         let newProgram = search(programList,serachValue)
 
+        //ページネーション情報を追加
+        
         //結果を返す
         return newProgram
-
-
     }
 })

@@ -1,69 +1,73 @@
+import { Program,SearchValue } from "../../interfaces/interfaces";
 //検索条件に一致する番組を計算して出力する
 
-export const search = (programList:any,serachValue:any) => {
+export const search = (programList:Program[],serachValue:SearchValue) => {
 
-    //TODO:ソート機能の実装
-
-    //
-
-    //並び替え関数
-    const createAsc = (a,b) => {
-        return a-b;
-    }
-
-    const createDesc = (a,b) => {
-        return b-a;
-    }
-
-
-    //console.log(programList,serachValue)
-    const { id, name, approval, situation } = serachValue;
-    //console.log( id, name, approval, situation)
-
-    // idの検索
-    const filteredById = programList.filter((program) => {
-        console.log(serachValue.id)
-      if (serachValue.id === "asc") {
-        console.log("asc")
-        //小さい順
-        console.log(programList.id.sort(createAsc))
-      } else if (serachValue.id === "desc") {
-        //大きい順
-        console.log("desc")
-
-        console.log(programList.id.sort(createDesc))
+  const { id, name, approval, situation } = serachValue;
+  console.log(serachValue,"検索")
+  
+    // idの検索処理
+    const idSort = (programList:Program[]) => {
+      let sortProgramList = programList.slice()
+      if(id === "desc" ) {
+        const sortedList:Program[] = sortProgramList.sort((a, b) => b.id - a.id);
+        //console.log(sortedList)
+        return sortedList;
+      } else if (id === "asc") {
+        const sortedList:Program[] = sortProgramList.sort((a, b) => a.id - b.id);
+        //console.log(sortedList)
+        return sortedList;
       } else {
-        return true
+        return sortProgramList
+      }
+    }
+
+    const sortProgram = idSort(programList);
+
+    // nameの検索
+    const filteredByName = sortProgram.filter((program:Program) => {
+      if (name === "") {
+        return program;
+      }
+      return program.name.startsWith(name);
+    });
+
+    // 承認の検索
+    const filteredByApproval = filteredByName.filter((program:Program) => {
+      if (approval === "true") {
+        return program.approval === true
+      } else if (approval === "false") {
+        return program.approval === false
+      } else {
+        return program;
       }
     });
 
-    console.log(filteredById)
+    //TODO: 公開設定のコードはかなり汚いので後でリファクタリングする
+    let newProgram = [];
 
-    // // nameの検索
-    // const filteredByName = filteredById.filter((program) => {
-    //   if (name === "") {
-    //     return true; // 空の場合は条件なしで全てのプログラムを返す
-    //   }
-    //   return program.name.includes(name);
-    // });
+     //すべてtrue、falseの場合
+     if(situation[0] && situation[10] && situation[20]) {
+      //console.log("すべてtrue")
+      newProgram.push(...filteredByApproval)
+    } else if (!situation[0] && !situation[10] && !situation[20]) {
+      //console.log("すべてfalse")
+      newProgram.push(...filteredByApproval)
+    } else {
+      //各項目のチェックを確認し配列に追加する
+      if(situation[0]) {
+        newProgram.push(...filteredByApproval.filter((program) => program.situation === 0))
+        //console.log(newProgram,"放送中")
+      }
+      if (situation[10]) {
+        newProgram.push(...filteredByApproval.filter((program) => program.situation === 10))
+        //console.log(newProgram,"放送予定")
+      }
+      if (situation[20]) {
+        newProgram.push(...filteredByApproval.filter((program) => program.situation === 20))
+        //console.log(newProgram,"作成中")
+      }
+    }
 
-    // // 承認の検索
-    // const filteredByApproval = filteredByName.filter((program) => {
-    //   if (approval === "all") {
-    //     return true; // "すべて" の場合は条件なしで全てのプログラムを返す
-    //   }
-    //   const isApproved = approval === "approved";
-    //   return program.approval === isApproved;
-    // });
-
-    // // 公開設定の検索
-    // const filteredBySituation = filteredByApproval.filter((program) => {
-    //   if (situation.length === 0) {
-    //     return true; // 一つも選択されていない場合は条件なしで全てのプログラムを返す
-    //   }
-    //   return situation.includes(program.situation);
-    // });
-
-    return programList;
-
+    return newProgram;
 }
