@@ -7,6 +7,15 @@ export const addTitleState = atom<Array<Task>>({
   default: [],
 })
 
+//投稿した情報を出力
+export const addTitleList = selector<Array<Task>>({
+  key: "addTitleList",
+  get: ({ get }) => {
+    const addTitleList: Array<Task> = get(addTitleState);
+    return addTitleList;
+  }
+})
+
 //selector=atomの状態を操作したい場合に利用する
 export const addTitleStateLength = selector<number>({
   key:"addTitleStateLength",
@@ -29,7 +38,7 @@ export const addApprovalStateLength = selector<number>({
 
     //
     for (let i = 0; i < addApproval.length; i ++) {
-      if(addApproval[i].approval === true) {
+      if(addApproval[i].Approval === true) {
         approvalLength ++
       }
     }

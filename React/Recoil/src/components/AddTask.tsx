@@ -16,7 +16,7 @@ function AddTask() {
 
   const deleteTask = (taskId: string) => {
     //atomに格納する配列を作成
-    const createTitle = addTitle.filter((item) => item.id !== taskId)
+    const createTitle = addTitle.filter((item) => item.Id !== taskId)
     //クリックしたid以外を格納
     setAddTitle(createTitle)
   }
@@ -24,10 +24,10 @@ function AddTask() {
   const approvalTask = (taskId: string) => {
    //クリックしたidを取得しapprovalの値を反転させる
    const updataTitle = addTitle.map((task:Task) => {
-    if(taskId === task.id) {
+    if(taskId === task.Id) {
       return {
         ...task,
-        approval:!task.approval
+        approval:!task.Approval
       }
     } else {
       return {
@@ -46,9 +46,9 @@ function AddTask() {
       <div>{addApprovalLength}個の承認されています</div>
       <ul>
       {addTitle.map((task: Task) => (
-          <li key={task.id}>{task.title}
-            <button onClick={() => deleteTask(task.id)}>削除</button>
-            <button onClick={() => approvalTask(task.id)}>{task.approval ? "承認": "未承認"}</button>
+          <li key={task.Id}>{task.Title}
+            <button onClick={() => deleteTask(task.Id)}>削除</button>
+            <button onClick={() => approvalTask(task.Id)}>{task.Approval ? "承認": "未承認"}</button>
           </li>
         ))
         }

@@ -20,7 +20,7 @@ const InputTask = () => {
     [inputTitle]
   )
   const handleClick = () => {
-    setAddTitle([...addTitle,{id: getKey(), title: inputTitle, approval: false}])
+    setAddTitle([...addTitle,{Id: getKey(), Title: inputTitle, Approval: false}])
     setInputTitle('')
     console.log(addTitle)
   }

@@ -1,5 +1,11 @@
 export type Task = {
-  id: string;
-  title:string;
-  approval:boolean
+  Id: string;
+  Title:string;
+  Approval:boolean
+}
+
+export type UpdateRowData = {
+  Id: string;
+  Title:string;
+  Approval:string;
 }
